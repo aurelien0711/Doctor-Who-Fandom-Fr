@@ -110,6 +110,14 @@
 </div>
 <!-- ======= DÉBUT NAVIGATION ======= -->
 <nav class="bg-gray-900 bg-opacity-80 fixed w-full z-50 backdrop-blur-sm">
+
+<div class="md:hidden flex items-center">
+<button class="text-white focus:outline-none" id="burgerButton">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
 <div class="container mx-auto px-4">
 <div class="flex justify-between items-center py-4">
 <div class="flex items-center">
@@ -627,6 +635,16 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'F12') {
         e.preventDefault();
     }
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const burger = document.getElementById('burgerButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+    });
 });
 </script>
 </body></html>
