@@ -217,32 +217,6 @@
 </div>
 </div>
 </section>
-<div class="flex flex-col items-center justify-center my-10 space-y-4">
-<audio autoplay="" id="tardisAudio" loop="" preload="auto" src="https://aurelien0711.github.io/Doctor-Who-Fandom-Fr/tardis-theme.mp3"></audio>
-<div class="flex space-x-4">
-<button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition shadow-lg" onclick="togglePlay()">⏯️ Play / Pause</button>
-</div>
-<div class="flex items-center space-x-2 text-white mt-2">
-<label class="font-medium" for="volume">🔊 Volume :</label>
-<input class="w-64" id="volume" max="1" min="0" onchange="setVolume(this.value)" step="0.01" type="range" value="1"/>
-</div>
-</div>
-<script>
-    const audio = document.getElementById("tardisAudio");
-
-    function togglePlay() {
-        if (audio.paused) {
-            audio.play();
-        } else {
-            audio.pause();
-        }
-    }
-
-    function setVolume(val) {
-        audio.volume = val;
-    }
-</script>
-
 <!-- ======= FIN SECTION ACCUEIL ======= -->
 <!-- ======= DÉBUT SECTION LES DOCTEURS ======= -->
 <section class="py-20 bg-gray-900" id="docteurs">
@@ -339,7 +313,7 @@
 <h2 class="text-4xl font-bold mb-12 text-center orbitron glow-text">Le TARDIS</h2>
 <div class="flex flex-col md:flex-row items-center">
 <div class="md:w-1/2 mb-10 md:mb-0 flex justify-center">
-<img alt="TARDIS" class="w-80 h-auto rounded-lg shadow-xl" src="https://www.dropbox.com/scl/fi/q5rcsjfguemjj1uy42pfh/97b9061d-6afb-4f41-b713-ff4b29969ec2.png?rlkey=7qf1x9as9wp55tzjlqzlzvl4z&st=cjdv63jf&dl=1"/>
+<img alt="TARDIS" class="w-80 h-auto rounded-lg shadow-xl" src="https://www.dropbox.com/scl/fi/q5rcsjfguemjj1uy42pfh/97b9061d-6afb-4f41-b713-ff4b29969ec2.png?rlkey=7qf1x9as9wp55tzjlqzlzvl4z&amp;st=cjdv63jf&amp;dl=1"/>
 </div>
 <div class="md:w-1/2 md:pl-10">
 <h3 class="text-2xl font-bold mb-6 orbitron">Time And Relative Dimension In Space</h3>
@@ -597,24 +571,13 @@
 </section>
 <!-- ======= FIN SECTION VIDÉOS ======= -->
 <!-- ======= DÉBUT FOOTER ======= -->
-
-<script>
-    const audio = document.getElementById("tardisAudio");
-
-    function playAudio() {
-        audio.play();
-    }
-    function pauseAudio() {
-        audio.pause();
-    }
-    function stopAudio() {
-        audio.pause();
-        audio.currentTime = 0;
-    }
-    function setVolume(val) {
-        audio.volume = val;
-    }
-</script>
+<section class="py-20 bg-gray-900 text-white">
+<div class="container mx-auto text-center">
+<h2 class="text-4xl font-bold mb-6">Quiz Doctor Who</h2>
+<p class="mb-8 text-lg">Teste tes connaissances sur l'univers de Doctor Who !</p>
+<a class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition" href="quiz.html">Commencer le Quiz</a>
+</div>
+</section>
 <footer class="bg-gray-900 py-12">
 <div class="container mx-auto px-4">
 <div class="flex flex-col md:flex-row justify-between items-center">
@@ -654,26 +617,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
-</script>
-<script>
-    const audio = document.getElementById("tardisAudio");
-
-    function playAudio() {
-        audio.play();
-    }
-
-    function pauseAudio() {
-        audio.pause();
-    }
-
-    function stopAudio() {
-        audio.pause();
-        audio.currentTime = 0;
-    }
-
-    function setVolume(val) {
-        audio.volume = val;
-    }
 </script>
 <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
