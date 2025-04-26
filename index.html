@@ -98,6 +98,10 @@
             height: 100%;
         }
     </style>
+<link href="https://upload.wikimedia.org/wikipedia/en/8/80/Doctor_Who_Logo.png" rel="icon" type="image/png"/>
+<meta content="Découvrez tout l'univers de Doctor Who sur le site Fandom Français. Infos, personnages, quiz et plus encore !" name="description"/>
+<meta content="Doctor Who, TARDIS, Fans, Série TV, Science-fiction, Fandom" name="keywords"/>
+<meta content="Aurélien0711" name="author"/>
 </head>
 <body>
 <!-- Notification pour les messages de succès -->
@@ -567,6 +571,35 @@
 </section>
 <!-- ======= FIN SECTION VIDÉOS ======= -->
 <!-- ======= DÉBUT FOOTER ======= -->
+<div class="flex flex-col items-center justify-center my-10 space-y-4">
+<audio id="tardisAudio" preload="auto" src="https://aurelien0711.github.io/Doctor-Who-Fandom-Fr/tardis-theme.mp3"></audio>
+<div class="flex space-x-4">
+<button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition shadow-lg" onclick="playAudio()">▶️ Play</button>
+<button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition shadow-lg" onclick="pauseAudio()">⏸ Pause</button>
+<button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition shadow-lg" onclick="stopAudio()">⏹ Stop</button>
+</div>
+<div class="flex items-center space-x-2 text-white mt-4">
+<label class="font-medium" for="volume">🔊 Volume :</label>
+<input class="w-64" id="volume" max="1" min="0" onchange="setVolume(this.value)" step="0.01" type="range" value="1"/>
+</div>
+</div>
+<script>
+    const audio = document.getElementById("tardisAudio");
+
+    function playAudio() {
+        audio.play();
+    }
+    function pauseAudio() {
+        audio.pause();
+    }
+    function stopAudio() {
+        audio.pause();
+        audio.currentTime = 0;
+    }
+    function setVolume(val) {
+        audio.volume = val;
+    }
+</script>
 <footer class="bg-gray-900 py-12">
 <div class="container mx-auto px-4">
 <div class="flex flex-col md:flex-row justify-between items-center">
@@ -607,18 +640,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 </script>
-<div class="flex flex-col items-center justify-center mt-10 space-y-4">
-<audio id="tardisAudio" src="https://aurelien0711.github.io/Doctor-Who-Fandom-Fr/tardis-theme.mp3"></audio>
-<div class="flex space-x-4">
-<button class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition shadow-lg" onclick="playAudio()">▶️ Play</button>
-<button class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition shadow-lg" onclick="pauseAudio()">⏸ Pause</button>
-<button class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition shadow-lg" onclick="stopAudio()">⏹ Stop</button>
-</div>
-<div class="flex items-center space-x-2 text-white">
-<label class="font-medium" for="volume">🔊 Volume :</label>
-<input class="w-64" id="volume" max="1" min="0" onchange="setVolume(this.value)" step="0.01" type="range" value="1"/>
-</div>
-</div>
+
 <script>
     const audio = document.getElementById("tardisAudio");
 
@@ -638,5 +660,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     function setVolume(val) {
         audio.volume = val;
     }
+</script>
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c')) {
+        e.preventDefault();
+    }
+    if (e.key === 'F12') {
+        e.preventDefault();
+    }
+});
 </script>
 </body></html>
