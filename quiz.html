@@ -1,0 +1,1042 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Doctor Who Avancé</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e3a8a);
+            min-height: 100vh;
+            color: #f8fafc;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.1'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .tardis-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        .option-hover:hover {
+            transform: translateY(-2px);
+        }
+        
+        .difficulty-btn.active {
+            background-color: rgba(37, 99, 235, 0.8);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.7);
+            transform: scale(1.05);
+        }
+        
+        .timer-bar {
+            transition: width 1s linear;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .answer-feedback {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 50;
+            animation: pulse 1s ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+        }
+        
+        .glow {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+        
+        .time-vortex {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, rgba(15, 23, 42, 0.95) 70%);
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 4s infinite;
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+        
+        .correct-answer {
+            animation: correctPulse 1s;
+        }
+        
+        @keyframes correctPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .wrong-answer {
+            animation: wrongShake 0.5s;
+        }
+        
+        @keyframes wrongShake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+        
+        .card {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="p-4">
+    <!-- Étoiles de fond -->
+    <div id="stars-container"></div>
+    <div class="time-vortex"></div>
+    
+    <div class="max-w-2xl mx-auto relative">
+        <!-- Écran d'accueil -->
+        <div id="welcome-screen" class="bg-blue-900/40 rounded-xl p-8 text-center shadow-xl card glow">
+            <div class="tardis-float w-48 h-48 mx-auto mb-6">
+                <img src="https://www.dropbox.com/scl/fi/e4ayhby75xoiryhdq84u1/746039c7-dd04-4eed-ab4f-1a9e885cf28c.png?rlkey=of839pry0zabd100cm575amao&st=aeu17h1o&dl=1" alt="TARDIS" class="w-full h-full object-contain">
+            </div>
+            
+            <h1 class="text-4xl font-bold text-blue-300 mb-4">Quiz Doctor Who</h1>
+            <p class="text-xl text-blue-100 mb-8">Testez vos connaissances sur l'univers du Docteur à travers le temps et l'espace !</p>
+            
+            <div class="mb-8">
+                <h2 class="text-xl font-semibold text-blue-200 mb-3">Choisissez votre niveau de difficulté :</h2>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button id="easy-btn" class="difficulty-btn bg-blue-900/40 hover:bg-blue-800/60 text-blue-100 py-3 px-8 rounded-lg transition-all option-hover active">
+                        <div class="text-2xl mb-1">👶</div>
+                        <div class="font-medium text-lg">Facile</div>
+                        <div class="text-xs text-blue-300 mt-1">Novice</div>
+                    </button>
+                    <button id="medium-btn" class="difficulty-btn bg-blue-900/40 hover:bg-blue-800/60 text-blue-100 py-3 px-8 rounded-lg transition-all option-hover">
+                        <div class="text-2xl mb-1">👨‍🚀</div>
+                        <div class="font-medium text-lg">Moyen</div>
+                        <div class="text-xs text-blue-300 mt-1">Compagnon</div>
+                    </button>
+                    <button id="hard-btn" class="difficulty-btn bg-blue-900/40 hover:bg-blue-800/60 text-blue-100 py-3 px-8 rounded-lg transition-all option-hover">
+                        <div class="text-2xl mb-1">👽</div>
+                        <div class="font-medium text-lg">Difficile</div>
+                        <div class="text-xs text-blue-300 mt-1">Seigneur du Temps</div>
+                    </button>
+                </div>
+            </div>
+            
+            <button id="start-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-blue-500/30 transition-all transform hover:scale-105">
+                Commencer l'Aventure
+            </button>
+        </div>
+        
+        <!-- Écran de jeu -->
+        <div id="game-screen" class="hidden">
+            <div class="flex justify-between items-center mb-4 bg-blue-900/40 rounded-xl p-4 card glow">
+                <div class="text-blue-300">
+                    <span class="font-bold">Question</span>
+                    <span id="question-number" class="font-bold">1</span>/<span id="total-questions">15</span>
+                </div>
+                <div class="text-blue-300 text-xl">
+                    <span class="font-bold">Score:</span>
+                    <span id="score" class="font-bold">0</span>
+                </div>
+                <div class="text-blue-300">
+                    <span class="font-bold">Temps:</span>
+                    <span id="timer" class="font-bold">20</span>s
+                </div>
+            </div>
+            
+            <div class="w-full bg-blue-900/30 rounded-full h-2.5 mb-2">
+                <div id="progress-bar" class="bg-blue-500 h-2.5 rounded-full" style="width: 0%"></div>
+            </div>
+            
+            <div class="w-full bg-red-900/30 rounded-full h-1.5 mb-6">
+                <div id="timer-bar" class="bg-red-500 h-1.5 rounded-full timer-bar" style="width: 100%"></div>
+            </div>
+            
+            <div class="bg-blue-900/40 rounded-xl p-8 shadow-xl mb-6 fade-in card glow">
+                <h2 id="question-text" class="text-2xl font-bold text-blue-200 mb-6">Question ici?</h2>
+                
+                <div id="options-container" class="grid grid-cols-1 gap-4">
+                    <!-- Les options seront générées dynamiquement -->
+                </div>
+            </div>
+            
+            <div id="feedback-container" class="hidden"></div>
+        </div>
+        
+        <!-- Écran de résultat -->
+        <div id="result-screen" class="hidden bg-blue-900/40 rounded-xl p-8 text-center shadow-xl card glow">
+            <div class="tardis-float w-24 h-24 mx-auto mb-4">
+                <img src="https://www.dropbox.com/scl/fi/e4ayhby75xoiryhdq84u1/746039c7-dd04-4eed-ab4f-1a9e885cf28c.png?rlkey=of839pry0zabd100cm575amao&st=aeu17h1o&dl=1" alt="TARDIS" class="w-full h-full object-contain">
+            </div>
+            
+            <h2 class="text-3xl font-bold text-blue-300 mb-4">Aventure Terminée!</h2>
+            <div class="mb-6">
+                <div class="text-6xl font-bold text-blue-200 mb-2">
+                    <span id="final-score">0</span>/<span id="final-total">15</span>
+                </div>
+                <p id="result-message" class="text-xl text-blue-100">Message basé sur le score</p>
+            </div>
+            
+            <div class="bg-blue-900/50 rounded-lg p-6 mb-8 glow">
+                <h3 class="text-xl font-bold text-blue-300 mb-4">Statistiques du Voyageur Temporel</h3>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="bg-blue-800/30 p-4 rounded-lg">
+                        <p class="text-blue-200">Réponses correctes</p>
+                        <p id="correct-answers" class="text-2xl font-bold text-blue-300">0</p>
+                    </div>
+                    <div class="bg-blue-800/30 p-4 rounded-lg">
+                        <p class="text-blue-200">Niveau</p>
+                        <p id="level" class="text-2xl font-bold text-blue-300">Novice</p>
+                    </div>
+                    <div class="bg-blue-800/30 p-4 rounded-lg">
+                        <p class="text-blue-200">Précision</p>
+                        <p id="accuracy" class="text-2xl font-bold text-blue-300">0%</p>
+                    </div>
+                    <div class="bg-blue-800/30 p-4 rounded-lg">
+                        <p class="text-blue-200">Difficulté</p>
+                        <p id="difficulty-display" class="text-2xl font-bold text-blue-300">Facile</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+                <button id="restart-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full text-lg shadow-lg hover:shadow-blue-500/30 transition-all transform hover:scale-105">
+                    Même Difficulté
+                </button>
+                <button id="change-diff-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full text-lg shadow-lg hover:shadow-purple-500/30 transition-all transform hover:scale-105">
+                    Changer de Difficulté
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Créer les étoiles de fond
+            const starsContainer = document.getElementById('stars-container');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 4}s`;
+                starsContainer.appendChild(star);
+            }
+            
+            // Éléments DOM
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const gameScreen = document.getElementById('game-screen');
+            const resultScreen = document.getElementById('result-screen');
+            const startBtn = document.getElementById('start-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            const changeDiffBtn = document.getElementById('change-diff-btn');
+            const questionNumber = document.getElementById('question-number');
+            const totalQuestionsElement = document.getElementById('total-questions');
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const scoreElement = document.getElementById('score');
+            const timerElement = document.getElementById('timer');
+            const timerBar = document.getElementById('timer-bar');
+            const progressBar = document.getElementById('progress-bar');
+            const finalScoreElement = document.getElementById('final-score');
+            const finalTotalElement = document.getElementById('final-total');
+            const resultMessage = document.getElementById('result-message');
+            const correctAnswersElement = document.getElementById('correct-answers');
+            const levelElement = document.getElementById('level');
+            const accuracyElement = document.getElementById('accuracy');
+            const difficultyDisplay = document.getElementById('difficulty-display');
+            const feedbackContainer = document.getElementById('feedback-container');
+            
+            // Boutons de difficulté
+            const easyBtn = document.getElementById('easy-btn');
+            const mediumBtn = document.getElementById('medium-btn');
+            const hardBtn = document.getElementById('hard-btn');
+            
+            // Variables du jeu
+            let currentQuestion = 0;
+            let score = 0;
+            let timer = 20;
+            let timerInterval;
+            let questions = [];
+            let difficulty = 'easy';
+            let totalQuestions = 15;
+            let answeredQuestions = 0;
+            
+            // Questions du quiz Doctor Who par niveau de difficulté
+            const quizQuestions = {
+                easy: [
+                    {
+                        question: "Quel est le vrai nom du Docteur?",
+                        options: ["John Smith", "Theta Sigma", "Il n'a jamais été révélé", "Le Maître"],
+                        correctAnswer: "Il n'a jamais été révélé"
+                    },
+                    {
+                        question: "Quel est l'ennemi le plus emblématique du Docteur?",
+                        options: ["Les Cybermen", "Les Daleks", "Les Anges Pleureurs", "Les Sontariens"],
+                        correctAnswer: "Les Daleks"
+                    },
+                    {
+                        question: "Comment s'appelle le vaisseau spatial du Docteur?",
+                        options: ["TARDIS", "SIDRAT", "UNIT", "Torchwood"],
+                        correctAnswer: "TARDIS"
+                    },
+                    {
+                        question: "Que signifie TARDIS?",
+                        options: ["Time And Relative Dimension In Space", "Time And Reality Distortion In Space", "Temporal Anomaly Rectifier Dimension In Space", "Time And Relative Distance In Stars"],
+                        correctAnswer: "Time And Relative Dimension In Space"
+                    },
+                    {
+                        question: "Qui a joué le rôle du 10ème Docteur?",
+                        options: ["Matt Smith", "Christopher Eccleston", "David Tennant", "Peter Capaldi"],
+                        correctAnswer: "David Tennant"
+                    },
+                    {
+                        question: "Quel est l'outil emblématique du Docteur?",
+                        options: ["Le Tournevis Sonique", "Le Manipulateur de Vortex", "Le Papier Psychique", "Le Détecteur de Paradoxes"],
+                        correctAnswer: "Le Tournevis Sonique"
+                    },
+                    {
+                        question: "Quelle est la planète d'origine du Docteur?",
+                        options: ["Terre", "Skaro", "Gallifrey", "Mondas"],
+                        correctAnswer: "Gallifrey"
+                    },
+                    {
+                        question: "Qui est River Song pour le Docteur?",
+                        options: ["Sa mère", "Sa fille", "Son épouse", "Sa sœur"],
+                        correctAnswer: "Son épouse"
+                    },
+                    {
+                        question: "Quel est le nom de l'espèce du Docteur?",
+                        options: ["Humain", "Seigneur du Temps", "Dalek", "Cyberman"],
+                        correctAnswer: "Seigneur du Temps"
+                    },
+                    {
+                        question: "Quelle phrase est souvent associée aux Daleks?",
+                        options: ["Supprimez!", "Convertissez!", "Exterminez!", "Éliminez!"],
+                        correctAnswer: "Exterminez!"
+                    },
+                    {
+                        question: "Qui était la première compagne du Docteur dans la série moderne (2005)?",
+                        options: ["Martha Jones", "Donna Noble", "Amy Pond", "Rose Tyler"],
+                        correctAnswer: "Rose Tyler"
+                    },
+                    {
+                        question: "Quel acteur a joué le 11ème Docteur?",
+                        options: ["David Tennant", "Matt Smith", "Peter Capaldi", "Christopher Eccleston"],
+                        correctAnswer: "Matt Smith"
+                    },
+                    {
+                        question: "Quel est le nom de l'organisation pour laquelle le 3ème Docteur a travaillé sur Terre?",
+                        options: ["Torchwood", "UNIT", "MI6", "SHIELD"],
+                        correctAnswer: "UNIT"
+                    },
+                    {
+                        question: "Qui est le principal ennemi du Docteur qui est aussi un Seigneur du Temps?",
+                        options: ["Le Maître", "Le Rani", "Rassilon", "Omega"],
+                        correctAnswer: "Le Maître"
+                    },
+                    {
+                        question: "Quel est le nom de la planète natale des Daleks?",
+                        options: ["Mondas", "Skaro", "Gallifrey", "Trenzalore"],
+                        correctAnswer: "Skaro"
+                    },
+                    {
+                        question: "Quelle actrice a joué le 13ème Docteur?",
+                        options: ["Billie Piper", "Karen Gillan", "Jodie Whittaker", "Catherine Tate"],
+                        correctAnswer: "Jodie Whittaker"
+                    },
+                    {
+                        question: "Quel est le nom du robot-chien qui a accompagné le 4ème Docteur?",
+                        options: ["K-9", "R2-D2", "Dalek Sec", "Handles"],
+                        correctAnswer: "K-9"
+                    },
+                    {
+                        question: "Quelle est la créature qui vous fait oublier dès que vous détournez le regard?",
+                        options: ["Les Anges Pleureurs", "Les Silences", "Les Oods", "Les Sontariens"],
+                        correctAnswer: "Les Silences"
+                    },
+                    {
+                        question: "Quel est le nom de la compagne qui est devenue 'La Fille Impossible'?",
+                        options: ["Amy Pond", "Rose Tyler", "Clara Oswald", "Martha Jones"],
+                        correctAnswer: "Clara Oswald"
+                    },
+                    {
+                        question: "Quel est le nom du village où le 11ème Docteur s'est retiré après avoir perdu Amy et Rory?",
+                        options: ["Christmas", "Leadworth", "Londres", "Cardiff"],
+                        correctAnswer: "Christmas"
+                    },
+                    {
+                        question: "Quel est le nom du premier épisode de la série moderne (2005)?",
+                        options: ["Rose", "The End of the World", "New Earth", "Smith and Jones"],
+                        correctAnswer: "Rose"
+                    },
+                    {
+                        question: "Quel est le nom de l'acteur qui a joué le 9ème Docteur?",
+                        options: ["David Tennant", "Matt Smith", "Christopher Eccleston", "Peter Capaldi"],
+                        correctAnswer: "Christopher Eccleston"
+                    },
+                    {
+                        question: "Quel est le nom de la compagne qui a voyagé avec le 12ème Docteur?",
+                        options: ["Rose Tyler", "Clara Oswald", "Amy Pond", "Donna Noble"],
+                        correctAnswer: "Clara Oswald"
+                    },
+                    {
+                        question: "Quel est le nom de l'espèce extraterrestre qui ressemble à des rhinocéros?",
+                        options: ["Les Sontariens", "Les Judoons", "Les Slitheens", "Les Zygons"],
+                        correctAnswer: "Les Judoons"
+                    },
+                    {
+                        question: "Quel est le nom du personnage joué par John Barrowman dans Doctor Who?",
+                        options: ["Mickey Smith", "Jack Harkness", "Rory Williams", "Craig Owens"],
+                        correctAnswer: "Jack Harkness"
+                    }
+                ],
+                medium: [
+                    {
+                        question: "Quel est le nom du père de River Song?",
+                        options: ["Mickey Smith", "Jack Harkness", "Rory Williams", "Craig Owens"],
+                        correctAnswer: "Rory Williams"
+                    },
+                    {
+                        question: "Quel est le vrai nom de Missy?",
+                        options: ["Le Maître", "Le Rani", "Romana", "Susan Foreman"],
+                        correctAnswer: "Le Maître"
+                    },
+                    {
+                        question: "Quel est le nom de la planète où le Docteur a passé 4,5 milliards d'années dans sa confession dial?",
+                        options: ["Trenzalore", "Gallifrey", "Skaro", "Une planète inconnue"],
+                        correctAnswer: "Une planète inconnue"
+                    },
+                    {
+                        question: "Qui a créé les Daleks?",
+                        options: ["Le Maître", "Davros", "Le Docteur", "Rassilon"],
+                        correctAnswer: "Davros"
+                    },
+                    {
+                        question: "Quel est le nom de la femme du Docteur sur Gallifrey (mentionnée dans 'The End of Time')?",
+                        options: ["River Song", "Rose Tyler", "Romana", "On ne sait pas"],
+                        correctAnswer: "On ne sait pas"
+                    },
+                    {
+                        question: "Quel est le nom du vaisseau spatial qui s'est écrasé sur la Terre dans l'épisode 'The Eleventh Hour'?",
+                        options: ["Le Byzantium", "Le Madame de Pompadour", "Le Titanic", "Le Prisonnier Zéro"],
+                        correctAnswer: "Le Prisonnier Zéro"
+                    },
+                    {
+                        question: "Qui a joué le War Doctor?",
+                        options: ["Christopher Eccleston", "Paul McGann", "John Hurt", "Peter Capaldi"],
+                        correctAnswer: "John Hurt"
+                    },
+                    {
+                        question: "Quel est le nom de la planète où le Docteur a rencontré les Oods pour la première fois?",
+                        options: ["Planète des Oods", "Satellite 5", "New Earth", "Messaline"],
+                        correctAnswer: "Planète des Oods"
+                    },
+                    {
+                        question: "Quel est le nom du dernier épisode avec le 10ème Docteur?",
+                        options: ["Journey's End", "The End of Time", "Doomsday", "The Waters of Mars"],
+                        correctAnswer: "The End of Time"
+                    },
+                    {
+                        question: "Qui a dit 'Spoilers' de façon récurrente dans la série?",
+                        options: ["Amy Pond", "River Song", "Clara Oswald", "Donna Noble"],
+                        correctAnswer: "River Song"
+                    },
+                    {
+                        question: "Quel est le nom du premier épisode de la série classique (1963)?",
+                        options: ["An Unearthly Child", "The Daleks", "The Edge of Destruction", "Marco Polo"],
+                        correctAnswer: "An Unearthly Child"
+                    },
+                    {
+                        question: "Où le Docteur a-t-il rencontré les Anges Pleureurs pour la première fois?",
+                        options: ["Dans une maison abandonnée", "Dans un vaisseau spatial écrasé", "Dans un cimetière", "Dans une église"],
+                        correctAnswer: "Dans une maison abandonnée"
+                    },
+                    {
+                        question: "Qui a joué le premier Docteur dans la série originale?",
+                        options: ["Patrick Troughton", "Jon Pertwee", "William Hartnell", "Tom Baker"],
+                        correctAnswer: "William Hartnell"
+                    },
+                    {
+                        question: "Quel est le nom de l'épisode où le 11ème Docteur rencontre le 10ème et le War Doctor?",
+                        options: ["The Day of the Doctor", "The Time of the Doctor", "The Name of the Doctor", "The End of Time"],
+                        correctAnswer: "The Day of the Doctor"
+                    },
+                    {
+                        question: "Quel est le nom de la fille du Docteur créée à partir de son ADN?",
+                        options: ["River Song", "Jenny", "Susan", "Clara"],
+                        correctAnswer: "Jenny"
+                    },
+                    {
+                        question: "Quel est le nom de l'épisode où le Docteur est piégé dans une boucle de confession?",
+                        options: ["Heaven Sent", "Hell Bent", "Face the Raven", "The Witch's Familiar"],
+                        correctAnswer: "Heaven Sent"
+                    },
+                    {
+                        question: "Quelle est la particularité de Jack Harkness après sa résurrection par Rose Tyler?",
+                        options: ["Il peut voyager dans le temps", "Il est immortel", "Il peut changer de visage", "Il peut lire dans les pensées"],
+                        correctAnswer: "Il est immortel"
+                    },
+                    {
+                        question: "Quel est le nom du dernier épisode avec le 11ème Docteur?",
+                        options: ["The Name of the Doctor", "The Day of the Doctor", "The Time of the Doctor", "Deep Breath"],
+                        correctAnswer: "The Time of the Doctor"
+                    },
+                    {
+                        question: "Quel est le nom de la mère d'Amy Pond?",
+                        options: ["Tabetha Pond", "Jackie Tyler", "Francine Jones", "Sylvia Noble"],
+                        correctAnswer: "Tabetha Pond"
+                    },
+                    {
+                        question: "Quel est le nom du personnage joué par Bernard Cribbins dans Doctor Who?",
+                        options: ["Wilfred Mott", "Brian Williams", "Graham O'Brien", "Pete Tyler"],
+                        correctAnswer: "Wilfred Mott"
+                    },
+                    {
+                        question: "Quel est le nom de l'acteur qui a joué le 8ème Docteur dans le téléfilm de 1996?",
+                        options: ["Christopher Eccleston", "Paul McGann", "Sylvester McCoy", "Peter Davison"],
+                        correctAnswer: "Paul McGann"
+                    },
+                    {
+                        question: "Quel est le nom de l'épisode où le 10ème Docteur rencontre le 5ème Docteur?",
+                        options: ["The Day of the Doctor", "Time Crash", "The Five Doctors", "The Two Doctors"],
+                        correctAnswer: "Time Crash"
+                    },
+                    {
+                        question: "Quel est le nom du Seigneur du Temps qui a été emprisonné dans un trou noir et qui est revenu pour se venger?",
+                        options: ["Le Maître", "Rassilon", "Omega", "Le Moine"],
+                        correctAnswer: "Omega"
+                    },
+                    {
+                        question: "Quel est le nom de la planète où se déroule l'épisode 'Midnight'?",
+                        options: ["Minuit", "Poosh", "Clom", "Raxacoricofallapatorius"],
+                        correctAnswer: "Minuit"
+                    },
+                    {
+                        question: "Quel est le nom de la mère de River Song?",
+                        options: ["Rose Tyler", "Martha Jones", "Amy Pond", "Donna Noble"],
+                        correctAnswer: "Amy Pond"
+                    }
+                ],
+                hard: [
+                    {
+                        question: "Où le Docteur a-t-il trouvé le Moment dans 'The Day of the Doctor'?",
+                        options: ["Sur Gallifrey", "Sur Karn", "Dans le TARDIS", "Dans la Matrice"],
+                        correctAnswer: "Sur Gallifrey"
+                    },
+                    {
+                        question: "Quel est le titre complet de Rassilon dans la série moderne?",
+                        options: ["Lord Président Rassilon", "Rassilon le Ressuscité", "Rassilon l'Impitoyable", "Lord Haut Président de Gallifrey"],
+                        correctAnswer: "Lord Président Rassilon"
+                    },
+                    {
+                        question: "Dans quelle constellation se trouve Gallifrey?",
+                        options: ["Kasterborous", "Andromeda", "Isop Galaxy", "Mutter's Spiral"],
+                        correctAnswer: "Kasterborous"
+                    },
+                    {
+                        question: "Qui a créé les Daleks Impériaux dans 'Remembrance of the Daleks'?",
+                        options: ["Le Maître", "Davros", "Le Docteur", "L'Empereur Dalek"],
+                        correctAnswer: "Davros"
+                    },
+                    {
+                        question: "Quel type de vaisseau les Seigneurs du Temps utilisaient principalement pendant la Guerre du Temps?",
+                        options: ["TARDIS de guerre", "Bowships", "TT Capsules", "Battle TARDIS"],
+                        correctAnswer: "Battle TARDIS"
+                    },
+                    {
+                        question: "Qui a joué le rôle du Valeyard dans la série classique?",
+                        options: ["Anthony Ainley", "Michael Jayston", "Geoffrey Hughes", "Eric Roberts"],
+                        correctAnswer: "Michael Jayston"
+                    },
+                    {
+                        question: "Dans quel épisode le 4ème Docteur rencontre-t-il Davros pour la première fois?",
+                        options: ["Genesis of the Daleks", "Destiny of the Daleks", "Resurrection of the Daleks", "Remembrance of the Daleks"],
+                        correctAnswer: "Genesis of the Daleks"
+                    },
+                    {
+                        question: "Qui était président de Gallifrey avant Rassilon dans la série classique?",
+                        options: ["Romana", "Borusa", "Flavia", "Omega"],
+                        correctAnswer: "Borusa"
+                    },
+                    {
+                        question: "Sur quelle planète le Docteur a-t-il rencontré les Sea Devils pour la première fois?",
+                        options: ["Terre", "Mars", "Mondas", "Telos"],
+                        correctAnswer: "Terre"
+                    },
+                    {
+                        question: "Quel Seigneur du Temps a été le mentor du Docteur à l'Académie?",
+                        options: ["Borusa", "Omega", "Rassilon", "Le Maître"],
+                        correctAnswer: "Borusa"
+                    },
+                    {
+                        question: "Dans quel épisode le 11ème Docteur apprend-il l'existence du Corsaire?",
+                        options: ["The Doctor's Wife", "A Good Man Goes to War", "The Curse of the Black Spot", "The Rebel Flesh"],
+                        correctAnswer: "The Doctor's Wife"
+                    },
+                    {
+                        question: "Quel acteur a joué Rassilon dans 'La Fin des Temps'?",
+                        options: ["Timothy Dalton", "John Simm", "Derek Jacobi", "Charles Dance"],
+                        correctAnswer: "Timothy Dalton"
+                    },
+                    {
+                        question: "Dans quel épisode le 12ème Docteur reste-t-il seul pendant 4,5 milliards d'années?",
+                        options: ["Heaven Sent", "Hell Bent", "Face the Raven", "The Witch's Familiar"],
+                        correctAnswer: "Heaven Sent"
+                    },
+                    {
+                        question: "Quel acteur a joué le Maître dans 'Utopia' avant sa régénération?",
+                        options: ["John Simm", "Derek Jacobi", "Roger Delgado", "Anthony Ainley"],
+                        correctAnswer: "Derek Jacobi"
+                    },
+                    {
+                        question: "Qui était la première compagne du Docteur dans la série originale?",
+                        options: ["Susan Foreman", "Barbara Wright", "Ian Chesterton", "Vicki"],
+                        correctAnswer: "Susan Foreman"
+                    },
+                    {
+                        question: "Quelle actrice a joué Missy, la version féminine du Maître?",
+                        options: ["Michelle Gomez", "Alex Kingston", "Frances Barber", "Jenna Coleman"],
+                        correctAnswer: "Michelle Gomez"
+                    },
+                    {
+                        question: "Quel acteur a joué le 7ème Docteur?",
+                        options: ["Colin Baker", "Sylvester McCoy", "Peter Davison", "Tom Baker"],
+                        correctAnswer: "Sylvester McCoy"
+                    },
+                    {
+                        question: "Dans quel épisode le 10ème Docteur doit-il effacer la mémoire de Donna Noble?",
+                        options: ["Journey's End", "The End of Time", "The Stolen Earth", "Turn Left"],
+                        correctAnswer: "Journey's End"
+                    },
+                    {
+                        question: "Quel acteur a joué le Maître face au 13ème Docteur?",
+                        options: ["Sacha Dhawan", "John Simm", "Michelle Gomez", "Derek Jacobi"],
+                        correctAnswer: "Sacha Dhawan"
+                    },
+                    {
+                        question: "Quel est le nom du Seigneur du Temps qui a créé les Daleks noirs dans la série classique?",
+                        options: ["Le Maître", "Le Moine", "Le Rani", "Le Guerre"],
+                        correctAnswer: "Le Guerre"
+                    },
+                    {
+                        question: "Quel est le nom de la planète où le 10ème Docteur a rencontré les Oods esclaves?",
+                        options: ["Ood-Sphere", "Messaline", "Midnight", "San Helios"],
+                        correctAnswer: "Ood-Sphere"
+                    },
+                    {
+                        question: "Quel est le nom du vaisseau spatial dans l'épisode 'Voyage of the Damned'?",
+                        options: ["Le Byzantium", "Le Titanic", "Le Valiant", "Le Sanctuary Base"],
+                        correctAnswer: "Le Titanic"
+                    },
+                    {
+                        question: "Quel est le nom de l'espèce qui a créé les Silences?",
+                        options: ["Les Seigneurs du Temps", "Les Sontariens", "L'Église du Silence", "Les Prêtres du Silence"],
+                        correctAnswer: "L'Église du Silence"
+                    },
+                    {
+                        question: "Quel est le nom du Seigneur du Temps qui est devenu le Valeyard?",
+                        options: ["Le Docteur", "Le Maître", "Rassilon", "Omega"],
+                        correctAnswer: "Le Docteur"
+                    },
+                    {
+                        question: "Quel est le nom de la planète où le Docteur a rencontré les Sycorax pour la première fois?",
+                        options: ["Terre", "Mars", "Raxacoricofallapatorius", "Clom"],
+                        correctAnswer: "Terre"
+                    }
+                ]
+            };
+            
+            // Mélanger les questions
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+            
+            // Sélectionner la difficulté
+            function selectDifficulty(diff) {
+                difficulty = diff;
+                
+                // Mettre à jour l'apparence des boutons
+                [easyBtn, mediumBtn, hardBtn].forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                switch(diff) {
+                    case 'easy':
+                        easyBtn.classList.add('active');
+                        break;
+                    case 'medium':
+                        mediumBtn.classList.add('active');
+                        break;
+                    case 'hard':
+                        hardBtn.classList.add('active');
+                        break;
+                }
+            }
+            
+            // Initialiser le jeu
+            function initGame() {
+                currentQuestion = 0;
+                score = 0;
+                answeredQuestions = 0;
+                
+                // Sélectionner les questions en fonction de la difficulté
+                questions = shuffleArray([...quizQuestions[difficulty]]);
+                questions = questions.slice(0, totalQuestions); // Limiter au nombre de questions souhaité
+                
+                scoreElement.textContent = score;
+                questionNumber.textContent = currentQuestion + 1;
+                totalQuestionsElement.textContent = totalQuestions;
+                finalTotalElement.textContent = totalQuestions;
+                progressBar.style.width = `${((currentQuestion + 1) / totalQuestions) * 100}%`;
+                
+                // Ajuster le timer en fonction de la difficulté
+                switch(difficulty) {
+                    case 'easy':
+                        timer = 20;
+                        break;
+                    case 'medium':
+                        timer = 15;
+                        break;
+                    case 'hard':
+                        timer = 10;
+                        break;
+                }
+                
+                timerElement.textContent = timer;
+                loadQuestion();
+            }
+            
+            // Charger une question
+            function loadQuestion() {
+                clearInterval(timerInterval);
+                
+                // Réinitialiser le timer en fonction de la difficulté
+                switch(difficulty) {
+                    case 'easy':
+                        timer = 20;
+                        break;
+                    case 'medium':
+                        timer = 15;
+                        break;
+                    case 'hard':
+                        timer = 10;
+                        break;
+                }
+                
+                timerElement.textContent = timer;
+                timerBar.style.width = '100%';
+                
+                const question = questions[currentQuestion];
+                questionText.textContent = question.question;
+                
+                // Mélanger les options
+                const shuffledOptions = shuffleArray([...question.options]);
+                
+                // Vider le conteneur d'options
+                optionsContainer.innerHTML = '';
+                
+                // Créer les boutons d'options
+                shuffledOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'bg-blue-900/50 text-blue-100 py-4 px-6 rounded-lg text-left hover:bg-blue-800/70 transition-all option-hover w-full text-lg';
+                    button.textContent = option;
+                    button.addEventListener('click', () => selectAnswer(option));
+                    optionsContainer.appendChild(button);
+                });
+                
+                // Démarrer le timer
+                startTimer();
+            }
+            
+            // Démarrer le timer
+            function startTimer() {
+                const timerDuration = timer;
+                timerInterval = setInterval(() => {
+                    timer--;
+                    timerElement.textContent = timer;
+                    timerBar.style.width = `${(timer / timerDuration) * 100}%`;
+                    
+                    if (timer <= 5) {
+                        timerElement.classList.add('text-red-400');
+                    } else {
+                        timerElement.classList.remove('text-red-400');
+                    }
+                    
+                    if (timer <= 0) {
+                        clearInterval(timerInterval);
+                        selectAnswer(null); // Temps écoulé
+                    }
+                }, 1000);
+            }
+            
+            // Afficher un feedback visuel
+            function showFeedback(isCorrect) {
+                const feedback = document.createElement('div');
+                feedback.className = 'answer-feedback text-8xl font-bold';
+                
+                if (isCorrect) {
+                    feedback.textContent = '✓';
+                    feedback.classList.add('text-green-500');
+                    // Ajouter un son de succès
+                    playSound('success');
+                } else {
+                    feedback.textContent = '✗';
+                    feedback.classList.add('text-red-500');
+                    // Ajouter un son d'échec
+                    playSound('error');
+                }
+                
+                feedbackContainer.innerHTML = '';
+                feedbackContainer.appendChild(feedback);
+                feedbackContainer.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    feedbackContainer.classList.add('hidden');
+                }, 1000);
+            }
+            
+            // Jouer un son
+            function playSound(type) {
+                // Simulation de son (pas de vrai son pour respecter les règles)
+                console.log(`Playing ${type} sound`);
+            }
+            
+            // Sélectionner une réponse
+            function selectAnswer(selectedOption) {
+                clearInterval(timerInterval);
+                answeredQuestions++;
+                
+                const correctAnswer = questions[currentQuestion].correctAnswer;
+                let isCorrect = false;
+                
+                // Mettre à jour les options pour montrer la bonne réponse
+                const options = optionsContainer.querySelectorAll('button');
+                options.forEach(option => {
+                    option.disabled = true;
+                    
+                    if (option.textContent === correctAnswer) {
+                        option.classList.remove('bg-blue-900/50');
+                        option.classList.add('bg-green-600/70', 'correct-answer');
+                    } else if (option.textContent === selectedOption && selectedOption !== correctAnswer) {
+                        option.classList.remove('bg-blue-900/50');
+                        option.classList.add('bg-red-600/70', 'wrong-answer');
+                    }
+                });
+                
+                // Vérifier si la réponse est correcte
+                if (selectedOption === correctAnswer) {
+                    score++;
+                    scoreElement.textContent = score;
+                    isCorrect = true;
+                }
+                
+                // Afficher le feedback
+                showFeedback(isCorrect);
+                
+                // Passer à la question suivante après un délai
+                setTimeout(() => {
+                    currentQuestion++;
+                    
+                    if (currentQuestion < questions.length) {
+                        questionNumber.textContent = currentQuestion + 1;
+                        progressBar.style.width = `${((currentQuestion + 1) / totalQuestions) * 100}%`;
+                        loadQuestion();
+                    } else {
+                        showResults();
+                    }
+                }, 1500);
+            }
+            
+            // Afficher les résultats
+            function showResults() {
+                gameScreen.classList.add('hidden');
+                resultScreen.classList.remove('hidden');
+                
+                finalScoreElement.textContent = score;
+                correctAnswersElement.textContent = score;
+                
+                // Calculer la précision
+                const accuracy = Math.round((score / answeredQuestions) * 100);
+                accuracyElement.textContent = `${accuracy}%`;
+                
+                // Afficher la difficulté
+                let diffText = "Facile";
+                switch(difficulty) {
+                    case 'medium':
+                        diffText = "Moyen";
+                        break;
+                    case 'hard':
+                        diffText = "Difficile";
+                        break;
+                }
+                difficultyDisplay.textContent = diffText;
+                
+                // Niveau basé sur le score et la difficulté
+                let level = "Novice";
+                let message = "";
+                
+                const scorePercentage = (score / totalQuestions) * 100;
+                
+                if (difficulty === 'easy') {
+                    if (scorePercentage >= 80) {
+                        level = "Compagnon";
+                        message = "Excellent! Vous êtes prêt pour un niveau plus difficile!";
+                    } else if (scorePercentage >= 50) {
+                        level = "Voyageur Occasionnel";
+                        message = "Pas mal! Vous connaissez les bases de Doctor Who.";
+                    } else {
+                        message = "Vous avez encore beaucoup à apprendre sur le Docteur!";
+                    }
+                } else if (difficulty === 'medium') {
+                    if (scorePercentage >= 80) {
+                        level = "Seigneur du Temps Junior";
+                        message = "Fantastique! Vous êtes un vrai fan de Doctor Who!";
+                    } else if (scorePercentage >= 50) {
+                        level = "Compagnon Expérimenté";
+                        message = "Bien joué! Vous connaissez bien l'univers du Docteur.";
+                    } else {
+                        level = "Voyageur Temporel";
+                        message = "Continuez à explorer l'univers de Doctor Who!";
+                    }
+                } else { // hard
+                    if (scorePercentage >= 80) {
+                        level = "Seigneur du Temps";
+                        message = "Allons-y! Vous êtes un expert de Doctor Who!";
+                    } else if (scorePercentage >= 50) {
+                        level = "Time Lord Academy";
+                        message = "Geronimo! Vous avez une connaissance impressionnante!";
+                    } else {
+                        level = "UNIT Scientist";
+                        message = "Même le niveau difficile ne vous fait pas peur!";
+                    }
+                }
+                
+                levelElement.textContent = level;
+                resultMessage.textContent = message;
+                
+                // Animation de confettis pour un bon score
+                if (scorePercentage >= 70) {
+                    createConfetti();
+                }
+            }
+            
+            // Créer des confettis pour célébrer
+            function createConfetti() {
+                const confettiContainer = document.createElement('div');
+                confettiContainer.style.position = 'fixed';
+                confettiContainer.style.top = '0';
+                confettiContainer.style.left = '0';
+                confettiContainer.style.width = '100%';
+                confettiContainer.style.height = '100%';
+                confettiContainer.style.pointerEvents = 'none';
+                confettiContainer.style.zIndex = '100';
+                document.body.appendChild(confettiContainer);
+                
+                const colors = ['#3b82f6', '#60a5fa', '#93c5fd', '#bfdbfe', '#dbeafe'];
+                
+                for (let i = 0; i < 100; i++) {
+                    setTimeout(() => {
+                        const confetti = document.createElement('div');
+                        confetti.style.position = 'absolute';
+                        confetti.style.width = `${Math.random() * 10 + 5}px`;
+                        confetti.style.height = `${Math.random() * 5 + 5}px`;
+                        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        confetti.style.left = `${Math.random() * 100}%`;
+                        confetti.style.top = '-10px';
+                        confetti.style.borderRadius = '2px';
+                        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                        
+                        confettiContainer.appendChild(confetti);
+                        
+                        const animationDuration = Math.random() * 3 + 2;
+                        const xPos = Math.random() * 100 - 50;
+                        
+                        confetti.animate([
+                            { transform: `translateY(0) translateX(0) rotate(0deg)`, opacity: 1 },
+                            { transform: `translateY(${window.innerHeight}px) translateX(${xPos}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+                        ], {
+                            duration: animationDuration * 1000,
+                            easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+                        });
+                        
+                        setTimeout(() => {
+                            confetti.remove();
+                        }, animationDuration * 1000);
+                    }, i * 50);
+                }
+                
+                setTimeout(() => {
+                    confettiContainer.remove();
+                }, 8000);
+            }
+            
+            // Événements des boutons de difficulté
+            easyBtn.addEventListener('click', () => selectDifficulty('easy'));
+            mediumBtn.addEventListener('click', () => selectDifficulty('medium'));
+            hardBtn.addEventListener('click', () => selectDifficulty('hard'));
+            
+            // Événements des boutons principaux
+            startBtn.addEventListener('click', () => {
+                welcomeScreen.classList.add('hidden');
+                gameScreen.classList.remove('hidden');
+                initGame();
+            });
+            
+            restartBtn.addEventListener('click', () => {
+                resultScreen.classList.add('hidden');
+                gameScreen.classList.remove('hidden');
+                initGame();
+            });
+            
+            changeDiffBtn.addEventListener('click', () => {
+                resultScreen.classList.add('hidden');
+                welcomeScreen.classList.remove('hidden');
+            });
+            
+            // Initialiser la difficulté par défaut
+            selectDifficulty('easy');
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9369b4b340f16ee7',t:'MTc0NTcwODUyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
