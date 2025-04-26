@@ -217,6 +217,32 @@
 </div>
 </div>
 </section>
+<div class="flex flex-col items-center justify-center my-10 space-y-4">
+<audio autoplay="" id="tardisAudio" loop="" preload="auto" src="https://aurelien0711.github.io/Doctor-Who-Fandom-Fr/tardis-theme.mp3"></audio>
+<div class="flex space-x-4">
+<button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition shadow-lg" onclick="togglePlay()">⏯️ Play / Pause</button>
+</div>
+<div class="flex items-center space-x-2 text-white mt-2">
+<label class="font-medium" for="volume">🔊 Volume :</label>
+<input class="w-64" id="volume" max="1" min="0" onchange="setVolume(this.value)" step="0.01" type="range" value="1"/>
+</div>
+</div>
+<script>
+    const audio = document.getElementById("tardisAudio");
+
+    function togglePlay() {
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+    }
+
+    function setVolume(val) {
+        audio.volume = val;
+    }
+</script>
+
 <!-- ======= FIN SECTION ACCUEIL ======= -->
 <!-- ======= DÉBUT SECTION LES DOCTEURS ======= -->
 <section class="py-20 bg-gray-900" id="docteurs">
@@ -571,18 +597,7 @@
 </section>
 <!-- ======= FIN SECTION VIDÉOS ======= -->
 <!-- ======= DÉBUT FOOTER ======= -->
-<div class="flex flex-col items-center justify-center my-10 space-y-4">
-<audio id="tardisAudio" preload="auto" src="https://aurelien0711.github.io/Doctor-Who-Fandom-Fr/tardis-theme.mp3"></audio>
-<div class="flex space-x-4">
-<button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition shadow-lg" onclick="playAudio()">▶️ Play</button>
-<button class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition shadow-lg" onclick="pauseAudio()">⏸ Pause</button>
-<button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition shadow-lg" onclick="stopAudio()">⏹ Stop</button>
-</div>
-<div class="flex items-center space-x-2 text-white mt-4">
-<label class="font-medium" for="volume">🔊 Volume :</label>
-<input class="w-64" id="volume" max="1" min="0" onchange="setVolume(this.value)" step="0.01" type="range" value="1"/>
-</div>
-</div>
+
 <script>
     const audio = document.getElementById("tardisAudio");
 
@@ -640,7 +655,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 </script>
-
 <script>
     const audio = document.getElementById("tardisAudio");
 
